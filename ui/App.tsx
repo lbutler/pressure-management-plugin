@@ -78,6 +78,15 @@ function App() {
         onGoBack={() => {
           setSelectedArea(undefined);
         }}
+        onHighlightAsset={(id) => {
+          console.log(`Highlight asset ${id}`);
+        }}
+        onMoveToAsset={(id) => {
+          console.log(`Move to asset ${id}`);
+        }}
+        onSetValveSetting={(id, value) => {
+          console.log(`Setting Valve ${id} to setting ${value}`);
+        }}
       />
       {/* {selectedArea === undefined ? (
         <ListServiceAreas

@@ -1,5 +1,6 @@
 import "./ServiceArea.css";
 
+import { useState } from "react";
 import { FunctionComponent } from "react";
 import { MapPin, CogIcon, WarningIcon } from "./icons";
 
@@ -10,21 +11,36 @@ interface ServiceAreaProps {
   setting: number | undefined;
   minCustPressure: number | undefined;
   onGoBack: () => void;
+  onHighlightAsset: (id: string | undefined) => void;
+  onMoveToAsset: (id: string) => void;
+  onSetValveSetting: (id: string, value: string) => void;
 }
 
 interface KeyPressureDetailsProps {
   title: string;
   value: number;
   locationId: string;
+  onHighlightAsset: (id: string | undefined) => void;
+  onMoveToAsset: (id: string) => void;
 }
 
 const KeyPressureDetails: FunctionComponent<KeyPressureDetailsProps> = ({
   title,
   value,
   locationId,
+  onHighlightAsset,
+  onMoveToAsset,
 }) => {
   return (
-    <div className="pressure-row-details valve-row-hover">
+    <div
+      className="pressure-row-details valve-row-hover"
+      onMouseOver={() => {
+        onHighlightAsset(locationId);
+      }}
+      onMouseLeave={() => {
+        onHighlightAsset(undefined);
+      }}
+    >
       <div className="details-left">
         <p className="details-text">{title}</p>
         <div className="details-alignLeft">
@@ -38,7 +54,12 @@ const KeyPressureDetails: FunctionComponent<KeyPressureDetailsProps> = ({
           <p className="value-bold">{locationId}</p>
         </div>
       </div>
-      <div className="details-right map-pin-right  valve-row-button">
+      <div
+        className="details-right map-pin-right  valve-row-button"
+        onClick={() => {
+          onMoveToAsset(locationId);
+        }}
+      >
         <MapPin />
       </div>
     </div>
@@ -52,7 +73,30 @@ const ServiceAreaDetails: FunctionComponent<ServiceAreaProps> = ({
   setting,
   minCustPressure,
   onGoBack,
+  onHighlightAsset,
+  onMoveToAsset,
+  onSetValveSetting,
 }) => {
+  const [inputValue, setInputValue] = useState(setting);
+
+  const handleChange = (e) => {
+    if (isNaN(e.target.value)) {
+      setInputValue(setting);
+      return;
+    }
+    setInputValue(e.target.value);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      onSetValveSetting(valveId, inputValue);
+    }
+  };
+
+  const handleBlur = () => {
+    onSetValveSetting(valveId, inputValue);
+  };
+
   const hasData = setting !== undefined && minCustPressure !== undefined;
   return (
     <div className="valve-row-wrapper">
@@ -92,22 +136,30 @@ const ServiceAreaDetails: FunctionComponent<ServiceAreaProps> = ({
                 title="Min. Cust. Pressure"
                 value={setting}
                 locationId="J12234"
+                onHighlightAsset={onHighlightAsset}
+                onMoveToAsset={onMoveToAsset}
               />
               <KeyPressureDetails
                 title="Max. Cust. Pressure"
                 value={setting}
                 locationId="J12234"
+                onHighlightAsset={onHighlightAsset}
+                onMoveToAsset={onMoveToAsset}
               />
               <KeyPressureDetails
                 title="Min. Area Pressure"
                 value={setting}
                 locationId="J12234"
+                onHighlightAsset={onHighlightAsset}
+                onMoveToAsset={onMoveToAsset}
               />
 
               <KeyPressureDetails
                 title="Max. Area Pressure"
                 value={setting}
                 locationId="J12234"
+                onHighlightAsset={onHighlightAsset}
+                onMoveToAsset={onMoveToAsset}
               />
             </>
           ) : (
@@ -122,8 +174,11 @@ const ServiceAreaDetails: FunctionComponent<ServiceAreaProps> = ({
               }}
             ></div>
 
-            <div className="section-header"> Valve setting </div>
-            <p className="details-text">
+            <div className="section-header" style={{ paddingBottom: "8px" }}>
+              {" "}
+              Valve setting{" "}
+            </div>
+            <p className="details-text" style={{ paddingBottom: "8px" }}>
               Apply a new setting from {currentTime}
             </p>
 
@@ -136,7 +191,10 @@ const ServiceAreaDetails: FunctionComponent<ServiceAreaProps> = ({
                 placeholder="0"
                 enterKeyHint="enter"
                 aria-describedby="addon-demandSpikeInput"
-                value="0"
+                value={inputValue}
+                onChange={handleChange}
+                onKeyPress={handleKeyPress}
+                onBlur={handleBlur}
               />
               <span className="input-addon">m</span>
             </div>
