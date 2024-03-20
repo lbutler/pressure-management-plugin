@@ -2,6 +2,8 @@ import React from "react";
 import { sendMessage } from "@qatium/plugin/ui";
 import { Message } from "../plugin/types";
 import ServiceArea from "./components/ServiceArea";
+import type { ServiceAreaProps } from "./components/ServiceArea";
+import ListServiceAreas from "./components/ListServiceAreas";
 import "./App.css";
 import { usePressureManagedAreas } from "./usePressureManagedAreas";
 
@@ -38,23 +40,23 @@ function App() {
     <p>First select a valve</p>
   );
 
-  const serviceAreas = [
+  const serviceAreas: ServiceAreaProps[] = [
     {
-      validId: "PRV 1",
+      valveId: "PRV 1",
       isWarning: true,
       currentTime: "12:00",
       setting: 12,
       minCustPressure: 22,
     },
     {
-      validId: "PRV 2",
+      valveId: "PRV 2",
       isWarning: false,
       currentTime: "12:00",
       setting: undefined,
       minCustPressure: 20,
     },
     {
-      validId: "PRV 3",
+      valveId: "PRV 3",
       isWarning: false,
       currentTime: "12:00",
       setting: 15.3,
@@ -68,27 +70,7 @@ function App() {
         <h3 className="title">Pressure Management</h3>
       </header>
 
-      {serviceAreas.map((area, index) => (
-        <React.Fragment key={area.validId}>
-          <ServiceArea
-            valveId={area.validId}
-            isWarning={area.isWarning}
-            currentTime={area.currentTime}
-            setting={area.setting}
-            minCustPressure={area.minCustPressure}
-          />
-
-          {index < serviceAreas.length - 1 && (
-            <div
-              role="separator"
-              style={{
-                borderTop: "1px solid rgb(53, 53, 75)",
-                margin: "0px -8px",
-              }}
-            ></div>
-          )}
-        </React.Fragment>
-      ))}
+      <ListServiceAreas serviceAreas={serviceAreas} />
     </>
   );
 }

@@ -3,7 +3,7 @@ import "./ServiceArea.css";
 import { FunctionComponent } from "react";
 import { MapPin, CogIcon, WarningIcon } from "./icons";
 
-export interface ServiceAreaProps {
+interface ServiceAreaProps {
   valveId: string;
   isWarning: boolean;
   currentTime: string;
@@ -11,7 +11,7 @@ export interface ServiceAreaProps {
   minCustPressure: number | undefined;
 }
 
-const ServiceArea: FunctionComponent<ServiceAreaProps> = ({
+const ServiceAreaDetails: FunctionComponent<ServiceAreaProps> = ({
   valveId,
   isWarning,
   currentTime,
@@ -71,4 +71,4 @@ const ServiceArea: FunctionComponent<ServiceAreaProps> = ({
   );
 };
 
-export default ServiceArea;
+export default ServiceAreaDetails;
