@@ -74,7 +74,7 @@ function App() {
         <h3 className="title">Pressure Management</h3>
       </header>
       <ServiceAreaDetails
-        {...serviceAreas[0]}
+        {...serviceAreas[2]}
         onGoBack={() => {
           setSelectedArea(undefined);
         }}

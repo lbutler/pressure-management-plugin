@@ -12,6 +12,39 @@ interface ServiceAreaProps {
   onGoBack: () => void;
 }
 
+interface KeyPressureDetailsProps {
+  title: string;
+  value: number;
+  locationId: string;
+}
+
+const KeyPressureDetails: FunctionComponent<KeyPressureDetailsProps> = ({
+  title,
+  value,
+  locationId,
+}) => {
+  return (
+    <div className="pressure-row-details valve-row-hover">
+      <div className="details-left">
+        <p className="details-text">{title}</p>
+        <div className="details-alignLeft">
+          <p className="value-bold">{value.toFixed(1)}</p>
+          <p className="value-unit">m</p>
+        </div>
+      </div>
+      <div className="details-right">
+        <p className="details-text">Location</p>
+        <div className="details-alignRight">
+          <p className="value-bold">{locationId}</p>
+        </div>
+      </div>
+      <div className="details-right map-pin-right  valve-row-button">
+        <MapPin />
+      </div>
+    </div>
+  );
+};
+
 const ServiceAreaDetails: FunctionComponent<ServiceAreaProps> = ({
   valveId,
   isWarning,
@@ -55,91 +88,41 @@ const ServiceAreaDetails: FunctionComponent<ServiceAreaProps> = ({
           {hasData ? (
             <>
               <div className="section-header"> Key Pressures </div>
-              <div className="pressure-row-details">
-                <div className="details-left">
-                  <p className="details-text">Max. Node Pressure</p>
-                  <div className="details-alignLeft">
-                    <p className="value-bold">{setting.toFixed(1)}</p>
-                    <p className="value-unit">m</p>
-                  </div>
-                </div>
-                <div className="details-right">
-                  <p className="details-text">Location</p>
-                  <div className="details-alignRight">
-                    <p className="value-bold">J12234</p>
-                  </div>
-                </div>
-                <div className="details-right map-pin-right">
-                  <MapPin />
-                </div>
-              </div>
+              <KeyPressureDetails
+                title="Min. Cust. Pressure"
+                value={setting}
+                locationId="J12234"
+              />
+              <KeyPressureDetails
+                title="Max. Cust. Pressure"
+                value={setting}
+                locationId="J12234"
+              />
+              <KeyPressureDetails
+                title="Min. Area Pressure"
+                value={setting}
+                locationId="J12234"
+              />
 
-              <div className="pressure-row-details">
-                <div className="details-left">
-                  <p className="details-text">Max. Node Pressure</p>
-                  <div className="details-alignLeft">
-                    <p className="value-bold">{setting.toFixed(1)}</p>
-                    <p className="value-unit">m</p>
-                  </div>
-                </div>
-                <div className="details-right">
-                  <p className="details-text">Location</p>
-                  <div className="details-alignRight">
-                    <p className="value-bold">J12234</p>
-                  </div>
-                </div>
-                <div className="details-right map-pin-right">
-                  <MapPin />
-                </div>
-              </div>
+              <KeyPressureDetails
+                title="Max. Area Pressure"
+                value={setting}
+                locationId="J12234"
+              />
             </>
           ) : (
             <p className="details-text">PRV is not active at {currentTime}</p>
           )}
           <>
-            <div className="section-header"> Key Pressures </div>
-            <div className="key-pressures">
-              <a className="key-pressure-link" role="link">
-                <span className="key-pressure-type">Min Cust. Pressure:</span>
-                <span className="key-pressure-type">J1234</span>
-
-                <button
-                  className="valve-row-button fly-valve-icon"
-                  style={{ opacity: 1 }}
-                >
-                  <MapPin />
-                </button>
-              </a>
-              <a className="key-pressure-link" role="link">
-                <span className="key-pressure-type">Max Cust. Pressure:</span>
-                <span className="key-pressure-type">J12sd34</span>
-
-                <button
-                  className="valve-row-button fly-valve-icon"
-                  style={{ opacity: 1 }}
-                >
-                  <MapPin />
-                </button>
-              </a>
-              <a className="key-pressure-link" role="link">
-                <span className="key-pressure-type">Min Node Pressure:</span>
-                <span className="key-pressure-type">J12sd34</span>
-
-                <button
-                  className="valve-row-button fly-valve-icon"
-                  style={{ opacity: 1 }}
-                >
-                  <MapPin />
-                </button>
-              </a>
-            </div>
             <div
               role="separator"
               style={{
                 borderTop: "1px solid rgb(53, 53, 75)",
-                margin: "0px -8px",
+                margin: "12px 0px",
               }}
             ></div>
+
+            <div className="section-header"> Valve setting </div>
             <p className="details-text">
               Apply a new setting from {currentTime}
             </p>
