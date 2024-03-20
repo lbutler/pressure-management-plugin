@@ -45,7 +45,7 @@ function App() {
       <ServiceArea />
       <div
         role="separator"
-        style={{ borderTop: "1px solid rgb(53, 53, 75)" }}
+        style={{ borderTop: "1px solid rgb(53, 53, 75)", margin: "0px -8px" }}
       ></div>
       <ServiceArea />
     </>
