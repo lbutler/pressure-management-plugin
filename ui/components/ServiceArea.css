@@ -79,13 +79,12 @@
 }
 
 .disable-icon-button {
-  pointer-events: none;
   color: #656565;
+  cursor: not-allowed;
 }
 
 .valve-row-button.fly-valve-icon:disabled svg {
   fill: #656565;
-
   cursor: not-allowed;
 }
 
