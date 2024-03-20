@@ -16,3 +16,12 @@ button {
 button:hover {
   background-color: #6882e2;
 }
+
+.header {
+  line-height: 1.5;
+}
+
+.title {
+  margin: 0px;
+  font-size: 18px;
+}

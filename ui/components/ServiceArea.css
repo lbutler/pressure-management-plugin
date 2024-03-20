@@ -1,0 +1,124 @@
+.tank-row-wrapper {
+  margin: 0px -8px;
+}
+
+.tank-row-padding {
+  padding-bottom: 8px;
+}
+.tank-row {
+  padding: 0px 8px;
+}
+.tank-row:hover {
+  cursor: pointer;
+}
+
+.tank-row:hover {
+  background-color: rgb(53, 53, 75);
+  box-shadow: 0 1px 0 0 rgb(53, 53, 75);
+}
+
+.tank-row-title {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: auto 24px;
+  padding: 8px 0px 4px;
+  line-height: 21px;
+}
+
+.tankId {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 14px;
+  display: block;
+  font-weight: 700;
+  text-align: left;
+}
+
+.tank-row:hover .fly-tank-icon {
+  opacity: 1;
+}
+
+.fly-tank-icon {
+  opacity: 0;
+  cursor: pointer;
+  border: none;
+  /* background: transparent; */
+  padding: 0 var(--theme-spacing-25);
+  color: #fff;
+  height: 14px;
+  min-width: 24px;
+  margin: auto;
+}
+
+.tank-row-details {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  display: grid;
+  gap: 12px;
+  line-height: 15px;
+  padding: 0px;
+  grid-auto-flow: column;
+}
+
+.tank-row-details-col {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  display: grid;
+  gap: 0px;
+  padding: 0px;
+}
+
+.tank-row-details-info {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  display: grid;
+  gap: 12px;
+  padding: 0px;
+  grid-auto-flow: column;
+}
+
+.tank-row-details-value-left {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 12px;
+  display: block;
+  font-weight: 400;
+  text-align: left;
+  color: rgb(151, 151, 181);
+}
+
+.tank-row-details-value-right {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 12px;
+  display: block;
+  font-weight: 400;
+  text-align: right;
+  color: rgb(151, 151, 181);
+}
+
+.value-bold {
+  font-weight: 700;
+  color: white;
+}
+
+.demand {
+  display: flex;
+  flex-direction: row;
+}
+
+.value-unit {
+  padding-left: 4px;
+}

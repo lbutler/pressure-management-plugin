@@ -1,13 +1,14 @@
-import { AssetTypes, onMessage } from '@qatium/plugin/ui';
-import { useEffect, useState } from 'react';
-import { Message, SelectedElement } from '../plugin/types';
+import { AssetTypes, onMessage } from "@qatium/plugin/ui";
+import { useEffect, useState } from "react";
+import { Message, SelectedElement } from "../plugin/types";
 
 export const useSelectedElement = () => {
-  const [selectedElement, setSelectedElement] = useState<SelectedElement>()
+  const [selectedElement, setSelectedElement] = useState<SelectedElement>();
 
   useEffect(() => {
     const { removeListener } = onMessage<Message>((msg) => {
       if (msg.event !== "selected-element") {
+        console.log(msg);
         return;
       }
 
@@ -16,12 +17,12 @@ export const useSelectedElement = () => {
       }
 
       if (msg.selectedElement?.type === AssetTypes.VALVE) {
-        return setSelectedElement(msg.selectedElement)
+        return setSelectedElement(msg.selectedElement);
       }
-    })
+    });
 
-    return removeListener
-  }, [])
+    return removeListener;
+  }, []);
 
   return selectedElement;
-}
+};

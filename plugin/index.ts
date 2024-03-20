@@ -1,11 +1,34 @@
-import { PluginI, SDK } from "@qatium/plugin/engine";
-import { Message } from './types';
+import {
+  PluginI,
+  SDK,
+  ValveFamilies,
+  AssetStatus,
+} from "@qatium/plugin/engine";
+import { Message } from "./types";
+
+import { findServiceArea } from "./findServiceArea";
 
 class Plugin implements PluginI<Message> {
   selectedElement: ReturnType<SDK["map"]["getSelectedElement"]>;
 
   run(sdk: SDK) {
-    const newSelectedElement = sdk.map.getSelectedElement()
+    // Get all PRVs
+    const prvElements = sdk.network.getValves(
+      (a) => a.family === ValveFamilies.PRV && !!a.simulation
+    );
+
+    const serviceAreas = prvElements
+      .map((prv) => {
+        return findServiceArea(prv, sdk);
+      })
+      .filter((a) => a) as Message["serviceAreas"];
+
+    sdk.ui.sendMessage({
+      event: "service-areas",
+      serviceAreas,
+    });
+
+    const newSelectedElement = sdk.map.getSelectedElement();
 
     if (newSelectedElement?.id === this.selectedElement?.id) {
       return;
@@ -15,8 +38,8 @@ class Plugin implements PluginI<Message> {
 
     return sdk.ui.sendMessage<Message>({
       event: "selected-element",
-      selectedElement: newSelectedElement
-    })
+      selectedElement: newSelectedElement,
+    });
   }
 
   onMessage(sdk: SDK, message: Message) {
