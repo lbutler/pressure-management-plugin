@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { sendMessage } from "@qatium/plugin/ui";
 import { Message } from "../plugin/types";
 import ServiceArea from "./components/ServiceArea";
 import type { ServiceAreaProps } from "./components/ServiceArea";
 import ListServiceAreas from "./components/ListServiceAreas";
+import ServiceAreaDetails from "./components/ServiceAreaDetails";
 import "./App.css";
 import { usePressureManagedAreas } from "./usePressureManagedAreas";
 
 function App() {
   const pressureManagedAreas = usePressureManagedAreas();
+  const [selectedArea, setSelectedArea] = useState<number | undefined>(
+    undefined
+  );
 
   const content = pressureManagedAreas ? (
     <>
@@ -69,8 +73,25 @@ function App() {
       <header className="header">
         <h3 className="title">Pressure Management</h3>
       </header>
-
-      <ListServiceAreas serviceAreas={serviceAreas} />
+      <ServiceAreaDetails
+        {...serviceAreas[0]}
+        onGoBack={() => {
+          setSelectedArea(undefined);
+        }}
+      />
+      {/* {selectedArea === undefined ? (
+        <ListServiceAreas
+          serviceAreas={serviceAreas}
+          onSelectArea={setSelectedArea}
+        />
+      ) : (
+        <ServiceAreaDetails
+          {...serviceAreas[selectedArea]}
+          onGoBack={() => {
+            setSelectedArea(undefined);
+          }}
+        />
+      )} */}
     </>
   );
 }

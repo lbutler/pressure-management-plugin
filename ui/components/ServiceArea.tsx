@@ -9,6 +9,7 @@ export interface ServiceAreaProps {
   currentTime: string;
   setting: number | undefined;
   minCustPressure: number | undefined;
+  onSelectArea: () => void;
 }
 
 const ServiceArea: FunctionComponent<ServiceAreaProps> = ({
@@ -17,11 +18,12 @@ const ServiceArea: FunctionComponent<ServiceAreaProps> = ({
   currentTime,
   setting,
   minCustPressure,
+  onSelectArea,
 }) => {
   const hasData = setting !== undefined && minCustPressure !== undefined;
   return (
     <div className="valve-row-wrapper">
-      <div className="valve-row">
+      <div className="valve-row  valve-row-hover">
         <div className="valve-row-content">
           <div className="valve-row-header">
             <h3 className="valveId">{valveId}</h3>
@@ -32,6 +34,7 @@ const ServiceArea: FunctionComponent<ServiceAreaProps> = ({
               className={`valve-row-button fly-valve-icon ${
                 !hasData ? "disable-icon-button" : ""
               }`}
+              onClick={onSelectArea}
               disabled={!hasData}
             >
               <CogIcon />
