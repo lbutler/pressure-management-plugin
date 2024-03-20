@@ -1,19 +1,19 @@
-.tank-row-wrapper {
+.valve-row-wrapper {
   margin: 0 -8px;
 }
 
-.tank-row {
+.valve-row {
   padding: 6px 8px;
   display: block;
   text-decoration: none;
   color: inherit; /* Ensures color is consistent */
 }
 
-.tank-row-content {
+.valve-row-content {
   padding-bottom: 8px;
 }
 
-.tank-warning {
+.valve-warning {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -24,11 +24,11 @@
   margin-left: 0px;
 }
 
-.tank-warning svg {
+.valve-warning svg {
   margin-right: 4px;
 }
 
-.tank-warning p {
+.valve-warning p {
   font-size: 12px;
   box-sizing: border-box;
   margin: 0px;
@@ -41,12 +41,12 @@
   text-align: left;
 }
 
-.tank-row:hover {
+.valve-row:hover {
   background-color: rgb(53, 53, 75);
   box-shadow: 0 1px 0 0 rgb(53, 53, 75);
 }
 
-.tank-row-header {
+.valve-row-header {
   box-sizing: border-box;
   margin: 0px;
   min-width: 0px;
@@ -57,7 +57,7 @@
   line-height: 21px;
 }
 
-.tank-row-button {
+.valve-row-button {
   padding: 0 4px;
   margin: 0px;
   cursor: pointer;
@@ -65,14 +65,14 @@
   background: transparent;
 }
 
-.tankId {
+.valveId {
   font-family: "Source Sans Pro", sans-serif;
   font-size: 14px;
   font-weight: 700;
   margin: 0;
 }
 
-.fly-tank-icon {
+.fly-valve-icon {
   opacity: 0;
   cursor: pointer;
   color: #fff;
@@ -83,17 +83,17 @@
   color: #656565;
 }
 
-.tank-row-button.fly-tank-icon:disabled svg {
+.valve-row-button.fly-valve-icon:disabled svg {
   fill: #656565;
 
   cursor: not-allowed;
 }
 
-.tank-row:hover .fly-tank-icon {
+.valve-row:hover .fly-valve-icon {
   opacity: 1;
 }
 
-.tank-row-details {
+.valve-row-details {
   display: flex;
   justify-content: space-between;
 }

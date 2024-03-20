@@ -20,16 +20,16 @@ const ServiceArea: FunctionComponent<ServiceAreaProps> = ({
 }) => {
   const hasData = setting !== undefined && minCustPressure !== undefined;
   return (
-    <div className="tank-row-wrapper">
-      <div className="tank-row">
-        <div className="tank-row-content">
-          <div className="tank-row-header">
-            <h3 className="tankId">{valveId}</h3>
-            <button className="tank-row-button fly-tank-icon">
+    <div className="valve-row-wrapper">
+      <div className="valve-row">
+        <div className="valve-row-content">
+          <div className="valve-row-header">
+            <h3 className="valveId">{valveId}</h3>
+            <button className="valve-row-button fly-valve-icon">
               <MapPin />
             </button>
             <button
-              className={`tank-row-button fly-tank-icon ${
+              className={`valve-row-button fly-valve-icon ${
                 !hasData ? "disable-icon-button" : ""
               }`}
               disabled={!hasData}
@@ -39,14 +39,14 @@ const ServiceArea: FunctionComponent<ServiceAreaProps> = ({
           </div>
 
           {isWarning && (
-            <div className="tank-warning">
+            <div className="valve-warning">
               <WarningIcon />
               <p>Customer pressure low</p>
             </div>
           )}
 
           {hasData ? (
-            <div className="tank-row-details">
+            <div className="valve-row-details">
               <div className="details-left">
                 <p className="details-text">Setting at {currentTime}</p>
                 <div className="details-alignLeft">
