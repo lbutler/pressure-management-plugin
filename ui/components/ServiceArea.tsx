@@ -10,6 +10,8 @@ export interface ServiceAreaProps {
   setting: number | undefined;
   minCustPressure: number | undefined;
   onSelectArea: () => void;
+  onHighlightAssets: (id: string[] | undefined) => void;
+  onMoveToAssets: (id: string[]) => void;
 }
 
 const ServiceArea: FunctionComponent<ServiceAreaProps> = ({
@@ -19,23 +21,35 @@ const ServiceArea: FunctionComponent<ServiceAreaProps> = ({
   setting,
   minCustPressure,
   onSelectArea,
+  onHighlightAssets,
+  onMoveToAssets,
 }) => {
   const hasData = setting !== undefined && minCustPressure !== undefined;
   return (
-    <div className="valve-row-wrapper">
+    <div
+      className="valve-row-wrapper"
+      onMouseOver={() => {
+        onHighlightAssets([valveId]);
+      }}
+      onMouseLeave={() => {
+        onHighlightAssets(undefined);
+      }}
+    >
       <div className="valve-row  valve-row-hover">
         <div className="valve-row-content">
           <div className="valve-row-header">
             <h3 className="valveId">{valveId}</h3>
-            <button className="valve-row-button fly-valve-icon">
+            <button
+              className="valve-row-button fly-valve-icon"
+              onClick={() => {
+                onMoveToAssets([valveId]);
+              }}
+            >
               <MapPin />
             </button>
             <button
-              className={`valve-row-button fly-valve-icon ${
-                !hasData ? "disable-icon-button" : ""
-              }`}
+              className={`valve-row-button fly-valve-icon`}
               onClick={onSelectArea}
-              disabled={!hasData}
             >
               <CogIcon />
             </button>

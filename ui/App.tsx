@@ -73,25 +73,16 @@ function App() {
       <header className="header">
         <h3 className="title">Pressure Management</h3>
       </header>
-      <ServiceAreaDetails
-        {...serviceAreas[2]}
-        onGoBack={() => {
-          setSelectedArea(undefined);
-        }}
-        onHighlightAsset={(id) => {
-          console.log(`Highlight asset ${id}`);
-        }}
-        onMoveToAsset={(id) => {
-          console.log(`Move to asset ${id}`);
-        }}
-        onSetValveSetting={(id, value) => {
-          console.log(`Setting Valve ${id} to setting ${value}`);
-        }}
-      />
-      {/* {selectedArea === undefined ? (
+      {selectedArea === undefined ? (
         <ListServiceAreas
           serviceAreas={serviceAreas}
           onSelectArea={setSelectedArea}
+          onHighlightAssets={(id) => {
+            console.log(`Highlight asset ${id}`);
+          }}
+          onMoveToAssets={(id) => {
+            console.log(`Move to asset ${id}`);
+          }}
         />
       ) : (
         <ServiceAreaDetails
@@ -99,8 +90,17 @@ function App() {
           onGoBack={() => {
             setSelectedArea(undefined);
           }}
+          onHighlightAssets={(id) => {
+            console.log(`Highlight asset ${id}`);
+          }}
+          onMoveToAssets={(id) => {
+            console.log(`Move to asset ${id}`);
+          }}
+          onSetValveSetting={(id, value) => {
+            console.log(`Setting Valve ${id} to setting ${value}`);
+          }}
         />
-      )} */}
+      )}
     </>
   );
 }

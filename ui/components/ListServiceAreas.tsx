@@ -7,11 +7,15 @@ import type { ServiceAreaProps } from "./ServiceArea";
 interface ListServiceAreasProps {
   serviceAreas: ServiceAreaProps[];
   onSelectArea: (index: number) => void;
+  onHighlightAssets: (id: string[] | undefined) => void;
+  onMoveToAssets: (id: string[]) => void;
 }
 
 const ListServiceAreas: FunctionComponent<ListServiceAreasProps> = ({
   serviceAreas,
   onSelectArea,
+  onHighlightAssets,
+  onMoveToAssets,
 }) => {
   return (
     <>
@@ -24,6 +28,8 @@ const ListServiceAreas: FunctionComponent<ListServiceAreasProps> = ({
             setting={area.setting}
             minCustPressure={area.minCustPressure}
             onSelectArea={() => onSelectArea(index)}
+            onHighlightAssets={onHighlightAssets}
+            onMoveToAssets={onMoveToAssets}
           />
 
           {index < serviceAreas.length - 1 && (

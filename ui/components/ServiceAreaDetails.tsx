@@ -2,17 +2,17 @@ import "./ServiceArea.css";
 
 import { useState } from "react";
 import { FunctionComponent } from "react";
-import { MapPin, CogIcon, WarningIcon } from "./icons";
+import { MapPin, WarningIcon } from "./icons";
 
-interface ServiceAreaProps {
+interface ServiceAreaDetailsProps {
   valveId: string;
   isWarning: boolean;
   currentTime: string;
   setting: number | undefined;
   minCustPressure: number | undefined;
   onGoBack: () => void;
-  onHighlightAsset: (id: string | undefined) => void;
-  onMoveToAsset: (id: string) => void;
+  onHighlightAssets: (id: string[] | undefined) => void;
+  onMoveToAssets: (id: string[]) => void;
   onSetValveSetting: (id: string, value: string) => void;
 }
 
@@ -20,25 +20,25 @@ interface KeyPressureDetailsProps {
   title: string;
   value: number;
   locationId: string;
-  onHighlightAsset: (id: string | undefined) => void;
-  onMoveToAsset: (id: string) => void;
+  onHighlightAssets: (id: string[] | undefined) => void;
+  onMoveToAssets: (id: string[]) => void;
 }
 
 const KeyPressureDetails: FunctionComponent<KeyPressureDetailsProps> = ({
   title,
   value,
   locationId,
-  onHighlightAsset,
-  onMoveToAsset,
+  onHighlightAssets,
+  onMoveToAssets,
 }) => {
   return (
     <div
       className="pressure-row-details valve-row-hover"
       onMouseOver={() => {
-        onHighlightAsset(locationId);
+        onHighlightAssets([locationId]);
       }}
       onMouseLeave={() => {
-        onHighlightAsset(undefined);
+        onHighlightAssets(undefined);
       }}
     >
       <div className="details-left">
@@ -57,7 +57,7 @@ const KeyPressureDetails: FunctionComponent<KeyPressureDetailsProps> = ({
       <div
         className="details-right map-pin-right  valve-row-button"
         onClick={() => {
-          onMoveToAsset(locationId);
+          onMoveToAssets([locationId]);
         }}
       >
         <MapPin />
@@ -66,15 +66,15 @@ const KeyPressureDetails: FunctionComponent<KeyPressureDetailsProps> = ({
   );
 };
 
-const ServiceAreaDetails: FunctionComponent<ServiceAreaProps> = ({
+const ServiceAreaDetails: FunctionComponent<ServiceAreaDetailsProps> = ({
   valveId,
   isWarning,
   currentTime,
   setting,
   minCustPressure,
   onGoBack,
-  onHighlightAsset,
-  onMoveToAsset,
+  onHighlightAssets,
+  onMoveToAssets,
   onSetValveSetting,
 }) => {
   const [inputValue, setInputValue] = useState(setting);
@@ -111,11 +111,8 @@ const ServiceAreaDetails: FunctionComponent<ServiceAreaProps> = ({
               <MapPin />
             </button>
             <button
-              className={`valve-row-button fly-valve-icon ${
-                !hasData ? "disable-icon-button" : ""
-              }`}
+              className={`valve-row-button fly-valve-icon`}
               style={{ opacity: 1 }}
-              disabled={!hasData}
               onClick={onGoBack}
             >
               Back
@@ -136,30 +133,30 @@ const ServiceAreaDetails: FunctionComponent<ServiceAreaProps> = ({
                 title="Min. Cust. Pressure"
                 value={setting}
                 locationId="J12234"
-                onHighlightAsset={onHighlightAsset}
-                onMoveToAsset={onMoveToAsset}
+                onHighlightAssets={onHighlightAssets}
+                onMoveToAssets={onMoveToAssets}
               />
               <KeyPressureDetails
                 title="Max. Cust. Pressure"
                 value={setting}
                 locationId="J12234"
-                onHighlightAsset={onHighlightAsset}
-                onMoveToAsset={onMoveToAsset}
+                onHighlightAssets={onHighlightAssets}
+                onMoveToAssets={onMoveToAssets}
               />
               <KeyPressureDetails
                 title="Min. Area Pressure"
                 value={setting}
                 locationId="J12234"
-                onHighlightAsset={onHighlightAsset}
-                onMoveToAsset={onMoveToAsset}
+                onHighlightAssets={onHighlightAssets}
+                onMoveToAssets={onMoveToAssets}
               />
 
               <KeyPressureDetails
                 title="Max. Area Pressure"
                 value={setting}
                 locationId="J12234"
-                onHighlightAsset={onHighlightAsset}
-                onMoveToAsset={onMoveToAsset}
+                onHighlightAssets={onHighlightAssets}
+                onMoveToAssets={onMoveToAssets}
               />
             </>
           ) : (
