@@ -27,4 +27,21 @@ const CogIcon = () => (
   </svg>
 );
 
-export { MapPin, CogIcon };
+const WarningIcon = () => (
+  <svg
+    width="14"
+    height="18"
+    viewBox="0 0 20 18"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M19.721 14.9184L11.7228 1.00806C10.95 -0.336021 9.05002 -0.336018 8.2772 1.00806L0.278993 14.9184C-0.504795 16.2816 0.455921 18 2.00179 18H17.9982C19.5441 18 20.5048 16.2815 19.721 14.9184ZM11.5 4H8.5L9 12H11L11.5 4ZM10 16.5C10.9665 16.5 11.75 15.7165 11.75 14.75C11.75 13.7835 10.9665 13 10 13C9.0335 13 8.25 13.7835 8.25 14.75C8.25 15.7165 9.0335 16.5 10 16.5Z"
+      fill="#FF9A5C"
+    ></path>
+  </svg>
+);
+
+export { MapPin, CogIcon, WarningIcon };

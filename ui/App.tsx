@@ -42,12 +42,35 @@ function App() {
       <header className="header">
         <h3 className="title">Pressure Management</h3>
       </header>
-      <ServiceArea />
+      <ServiceArea
+        valveId={"PRV 1"}
+        isWarning={true}
+        currentTime={"12:00"}
+        setting={12}
+        minCustPressure={22}
+      />
       <div
         role="separator"
         style={{ borderTop: "1px solid rgb(53, 53, 75)", margin: "0px -8px" }}
       ></div>
-      <ServiceArea />
+      <ServiceArea
+        valveId={"PRV 2"}
+        isWarning={false}
+        currentTime={"12:00"}
+        setting={undefined}
+        minCustPressure={20}
+      />
+      <div
+        role="separator"
+        style={{ borderTop: "1px solid rgb(53, 53, 75)", margin: "0px -8px" }}
+      ></div>
+      <ServiceArea
+        valveId={"PRV 3"}
+        isWarning={false}
+        currentTime={"12:00"}
+        setting={15.3}
+        minCustPressure={26.5}
+      />
     </>
   );
 }
