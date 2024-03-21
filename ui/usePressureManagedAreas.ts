@@ -1,10 +1,10 @@
 import { onMessage } from "@qatium/plugin/ui";
 import { useEffect, useState } from "react";
-import { Message, ServiceArea } from "../plugin/types";
+import { Message, ServiceAreaInfo } from "../plugin/types";
 
 export const usePressureManagedAreas = () => {
   const [pressureManagedAreas, setPressureManagedAreas] =
-    useState<ServiceArea[]>();
+    useState<ServiceAreaInfo[]>();
 
   useEffect(() => {
     const { removeListener } = onMessage<Message>((msg) => {

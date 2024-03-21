@@ -6,13 +6,27 @@ import {
   ValveStatus,
 } from "@qatium/plugin/engine";
 
-import type { ServiceArea } from "./types";
+import type { ServiceAreaInfo } from "./types";
 
-function findServiceArea(prv: Valve, sdk: SDK): ServiceArea | undefined {
+function findServiceArea(prv: Valve, sdk: SDK): ServiceAreaInfo {
   console.log(`Searching valve ${prv.id} service area...`);
 
   if (prv.status !== "ACTIVE") {
-    return undefined;
+    return {
+      id: prv.id,
+      currentTime: "99:99",
+      currentSetting: prv.setting,
+      currentStatus: prv.status,
+      pipesInServiceArea: [prv.id],
+      minCustomerId: undefined,
+      minCustomerPressure: undefined,
+      minNodeId: undefined,
+      minNodePressure: undefined,
+      maxCustomerId: undefined,
+      maxCustomerPressure: undefined,
+      maxNodeId: undefined,
+      maxNodePressure: undefined,
+    };
   }
 
   const neighborAssets = sdk.network.getNeighborAssets(prv.id);
@@ -45,6 +59,7 @@ function findServiceArea(prv: Valve, sdk: SDK): ServiceArea | undefined {
     id: prv.id,
     currentSetting: prv.setting,
     currentStatus: prv.status,
+    currentTime: "99:99",
     pipesInServiceArea: pipesInServiceArea,
     //assestsInServiceArea: connectedAssets,
     ...servicePressures,

@@ -27,19 +27,6 @@ class Plugin implements PluginI<Message> {
       event: "service-areas",
       serviceAreas,
     });
-
-    const newSelectedElement = sdk.map.getSelectedElement();
-
-    if (newSelectedElement?.id === this.selectedElement?.id) {
-      return;
-    }
-
-    this.selectedElement = newSelectedElement;
-
-    return sdk.ui.sendMessage<Message>({
-      event: "selected-element",
-      selectedElement: newSelectedElement,
-    });
   }
 
   onMessage(sdk: SDK, message: Message) {

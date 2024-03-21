@@ -5,7 +5,6 @@ import { MapPin, CogIcon, WarningIcon } from "./icons";
 
 export interface ServiceAreaProps {
   valveId: string;
-  isWarning: boolean;
   currentTime: string;
   setting: number | undefined;
   minCustPressure: number | undefined;
@@ -16,7 +15,6 @@ export interface ServiceAreaProps {
 
 const ServiceArea: FunctionComponent<ServiceAreaProps> = ({
   valveId,
-  isWarning,
   currentTime,
   setting,
   minCustPressure,
@@ -25,6 +23,7 @@ const ServiceArea: FunctionComponent<ServiceAreaProps> = ({
   onMoveToAssets,
 }) => {
   const hasData = setting !== undefined && minCustPressure !== undefined;
+  const isWarning = minCustPressure !== undefined && minCustPressure < 20;
   return (
     <div
       className="valve-row-wrapper"

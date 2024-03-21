@@ -4,12 +4,10 @@ import { useState } from "react";
 import { FunctionComponent } from "react";
 import { MapPin, WarningIcon } from "./icons";
 
+import type { ServiceAreaInfo } from "../../plugin/types";
+
 interface ServiceAreaDetailsProps {
-  valveId: string;
-  isWarning: boolean;
-  currentTime: string;
-  setting: number | undefined;
-  minCustPressure: number | undefined;
+  serviceArea: ServiceAreaInfo;
   onGoBack: () => void;
   onHighlightAssets: (id: string[] | undefined) => void;
   onMoveToAssets: (id: string[]) => void;
@@ -67,21 +65,20 @@ const KeyPressureDetails: FunctionComponent<KeyPressureDetailsProps> = ({
 };
 
 const ServiceAreaDetails: FunctionComponent<ServiceAreaDetailsProps> = ({
-  valveId,
-  isWarning,
-  currentTime,
-  setting,
-  minCustPressure,
+  serviceArea,
   onGoBack,
   onHighlightAssets,
   onMoveToAssets,
   onSetValveSetting,
 }) => {
-  const [inputValue, setInputValue] = useState(setting);
+  const [inputValue, setInputValue] = useState(serviceArea.currentSetting);
+  const isWarning =
+    serviceArea.minCustomerPressure !== undefined &&
+    serviceArea.minCustomerPressure < 20;
 
   const handleChange = (e) => {
     if (isNaN(e.target.value)) {
-      setInputValue(setting);
+      setInputValue(serviceArea.currentSetting);
       return;
     }
     setInputValue(e.target.value);
@@ -89,21 +86,23 @@ const ServiceAreaDetails: FunctionComponent<ServiceAreaDetailsProps> = ({
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
-      onSetValveSetting(valveId, inputValue);
+      onSetValveSetting(serviceArea.id, inputValue);
     }
   };
 
   const handleBlur = () => {
-    onSetValveSetting(valveId, inputValue);
+    onSetValveSetting(serviceArea.id, inputValue);
   };
 
-  const hasData = setting !== undefined && minCustPressure !== undefined;
+  const hasData =
+    serviceArea.currentSetting !== undefined &&
+    serviceArea.minCustomerPressure !== undefined;
   return (
     <div className="valve-row-wrapper">
       <div className="valve-row">
         <div className="valve-row-content">
           <div className="valve-row-header">
-            <h3 className="valveId">{valveId}</h3>
+            <h3 className="valveId">{serviceArea.id}</h3>
             <button
               className="valve-row-button fly-valve-icon"
               style={{ opacity: 1 }}
@@ -131,36 +130,38 @@ const ServiceAreaDetails: FunctionComponent<ServiceAreaDetailsProps> = ({
               <div className="section-header"> Key Pressures </div>
               <KeyPressureDetails
                 title="Min. Cust. Pressure"
-                value={setting}
-                locationId="J12234"
+                value={serviceArea.minCustomerPressure}
+                locationId={serviceArea.minCustomerId}
                 onHighlightAssets={onHighlightAssets}
                 onMoveToAssets={onMoveToAssets}
               />
               <KeyPressureDetails
                 title="Max. Cust. Pressure"
-                value={setting}
-                locationId="J12234"
+                value={serviceArea.maxCustomerPressure}
+                locationId={serviceArea.maxCustomerId}
                 onHighlightAssets={onHighlightAssets}
                 onMoveToAssets={onMoveToAssets}
               />
               <KeyPressureDetails
                 title="Min. Area Pressure"
-                value={setting}
-                locationId="J12234"
+                value={serviceArea.minNodePressure}
+                locationId={serviceArea.minNodeId}
                 onHighlightAssets={onHighlightAssets}
                 onMoveToAssets={onMoveToAssets}
               />
 
               <KeyPressureDetails
                 title="Max. Area Pressure"
-                value={setting}
-                locationId="J12234"
+                value={serviceArea.maxNodePressure}
+                locationId={serviceArea.maxNodeId}
                 onHighlightAssets={onHighlightAssets}
                 onMoveToAssets={onMoveToAssets}
               />
             </>
           ) : (
-            <p className="details-text">PRV is not active at {currentTime}</p>
+            <p className="details-text">
+              PRV is not active at {serviceArea.currentTime}
+            </p>
           )}
           <>
             <div
@@ -176,7 +177,7 @@ const ServiceAreaDetails: FunctionComponent<ServiceAreaDetailsProps> = ({
               Valve setting{" "}
             </div>
             <p className="details-text" style={{ paddingBottom: "8px" }}>
-              Apply a new setting from {currentTime}
+              Apply a new setting from {serviceArea.currentTime}
             </p>
 
             <div className="input-wrapper has-addon">

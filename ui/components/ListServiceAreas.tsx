@@ -2,10 +2,12 @@ import "./ServiceArea.css";
 
 import React, { FunctionComponent } from "react";
 import ServiceArea from "./ServiceArea";
-import type { ServiceAreaProps } from "./ServiceArea";
+//import type { ServiceAreaProps } from "./ServiceArea";
+
+import type { ServiceAreaInfo } from "../../plugin/types";
 
 interface ListServiceAreasProps {
-  serviceAreas: ServiceAreaProps[];
+  serviceAreas: ServiceAreaInfo[];
   onSelectArea: (index: number) => void;
   onHighlightAssets: (id: string[] | undefined) => void;
   onMoveToAssets: (id: string[]) => void;
@@ -20,13 +22,12 @@ const ListServiceAreas: FunctionComponent<ListServiceAreasProps> = ({
   return (
     <>
       {serviceAreas.map((area, index) => (
-        <React.Fragment key={area.valveId}>
+        <React.Fragment key={area.id}>
           <ServiceArea
-            valveId={area.valveId}
-            isWarning={area.isWarning}
+            valveId={area.id}
             currentTime={area.currentTime}
-            setting={area.setting}
-            minCustPressure={area.minCustPressure}
+            setting={area.currentSetting}
+            minCustPressure={area.minCustomerPressure}
             onSelectArea={() => onSelectArea(index)}
             onHighlightAssets={onHighlightAssets}
             onMoveToAssets={onMoveToAssets}
