@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { sendMessage } from "@qatium/plugin/ui";
 import { Message } from "../plugin/types";
-import ServiceArea from "./components/ServiceArea";
-import type { ServiceAreaProps } from "./components/ServiceArea";
 import ListServiceAreas from "./components/ListServiceAreas";
 import ServiceAreaDetails from "./components/ServiceAreaDetails";
 import "./App.css";

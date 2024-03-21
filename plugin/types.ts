@@ -1,14 +1,11 @@
-import { SDK, Valve, ValveStatus } from "@qatium/plugin";
-
-//export type SelectedElement = ReturnType<SDK["map"]["getSelectedElement"]>
+import { Valve, ValveStatus } from "@qatium/plugin/engine";
 
 export interface ServiceAreaInfo {
   id: string;
   currentTime: string;
-  currentSetting: number;
-  currentStatus: ValveStatus;
+  currentSetting: number | undefined;
+  currentStatus: ValveStatus | undefined;
   pipesInServiceArea: string[];
-  //assestsInServiceArea: Asset[];
   minCustomerId: string | undefined;
   minCustomerPressure: number | undefined;
   minNodeId: string | undefined;
@@ -37,10 +34,3 @@ export type Message =
       valveId: Valve["id"];
       setting: number;
     };
-
-//export type Message =
-//  | {
-//    event: "selected-element",
-//    selectedElement: SelectedElement
-//  }
-//

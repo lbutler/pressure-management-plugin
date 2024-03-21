@@ -1,10 +1,4 @@
-import {
-  Valve,
-  SDK,
-  Asset,
-  Junction,
-  ValveStatus,
-} from "@qatium/plugin/engine";
+import { Valve, SDK, Asset, Junction } from "@qatium/plugin/engine";
 
 import type { ServiceAreaInfo } from "./types";
 
@@ -14,6 +8,7 @@ function findServiceArea(prv: Valve, sdk: SDK): ServiceAreaInfo {
     timeZone: timeObject.timezone,
     hour: "2-digit",
     minute: "2-digit",
+    //@ts-ignore
     hourCycle: "h23",
   });
   if (prv.simulation?.status !== "ACTIVE") {
@@ -71,6 +66,7 @@ function findDownstreamNode(assets: Asset[], sdk: SDK): string {
     .map((a) =>
       sdk.network.getNeighborAssets(a.id).filter((n) => n.type === "Junction")
     )
+    //@ts-ignore
     .flat();
 
   const lowestJunction = junctions.reduce(
@@ -96,12 +92,10 @@ function findDownstreamNode(assets: Asset[], sdk: SDK): string {
 }
 
 function findServicePressures(connectedAssets: Asset[]) {
-  const customerNodes: Junction[] = connectedAssets.filter(
+  const customerNodes = connectedAssets.filter(
     (a) => a.group === "customerPoint"
   );
-  const nodes: Junction[] = connectedAssets.filter(
-    (a) => a.type === "Junction"
-  );
+  const nodes = connectedAssets.filter((a) => a.type === "Junction");
 
   const minCustomer = getByPressure(customerNodes);
   const minNode = getByPressure(nodes);
@@ -120,7 +114,7 @@ function findServicePressures(connectedAssets: Asset[]) {
   };
 }
 
-function getByPressure(nodes: Junction[], findMin: boolean = true): Junction {
+function getByPressure(nodes: Asset[], findMin: boolean = true): Asset {
   return nodes.reduce((prev, current) => {
     // If one of the nodes doesn't have a simulation object, return the other node
     if (!prev.simulation) return current;
