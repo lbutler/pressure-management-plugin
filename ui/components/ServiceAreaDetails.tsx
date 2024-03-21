@@ -9,7 +9,7 @@ import type { ServiceAreaInfo } from "../../plugin/types";
 interface ServiceAreaDetailsProps {
   serviceArea: ServiceAreaInfo;
   onGoBack: () => void;
-  onHighlightAssets: (id: string[] | undefined) => void;
+  onHighlightAssets: (id: string[]) => void;
   onMoveToAssets: (id: string[]) => void;
   onSetValveSetting: (id: string, value: string) => void;
 }
@@ -18,7 +18,7 @@ interface KeyPressureDetailsProps {
   title: string;
   value: number;
   locationId: string;
-  onHighlightAssets: (id: string[] | undefined) => void;
+  onHighlightAssets: (id: string[]) => void;
   onMoveToAssets: (id: string[]) => void;
 }
 
@@ -36,7 +36,7 @@ const KeyPressureDetails: FunctionComponent<KeyPressureDetailsProps> = ({
         onHighlightAssets([locationId]);
       }}
       onMouseLeave={() => {
-        onHighlightAssets(undefined);
+        onHighlightAssets([]);
       }}
     >
       <div className="details-left">

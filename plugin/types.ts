@@ -19,17 +19,23 @@ export interface ServiceAreaInfo {
   maxNodePressure: number | undefined;
 }
 
-export type Message = {
-  event: "service-areas";
-  serviceAreas: ServiceAreaInfo[];
-};
+export type Message =
+  | {
+      event: "service-areas";
+      serviceAreas: ServiceAreaInfo[];
+    }
+  | {
+      event: "highlight-assets";
+      assets: string[];
+    }
+  | {
+      event: "move-to-assets";
+      assets: string[];
+    };
 
 //export type Message =
 //  | {
 //    event: "selected-element",
 //    selectedElement: SelectedElement
 //  }
-//  | {
-//    event: "close-valve",
-//    valveId: Valve["id"]
-//  }
+//

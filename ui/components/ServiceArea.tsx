@@ -8,8 +8,9 @@ export interface ServiceAreaProps {
   currentTime: string;
   setting: number | undefined;
   minCustPressure: number | undefined;
+  pipesInServiceArea: string[];
   onSelectArea: () => void;
-  onHighlightAssets: (id: string[] | undefined) => void;
+  onHighlightAssets: (id: string[]) => void;
   onMoveToAssets: (id: string[]) => void;
 }
 
@@ -17,6 +18,7 @@ const ServiceArea: FunctionComponent<ServiceAreaProps> = ({
   valveId,
   currentTime,
   setting,
+  pipesInServiceArea,
   minCustPressure,
   onSelectArea,
   onHighlightAssets,
@@ -28,10 +30,10 @@ const ServiceArea: FunctionComponent<ServiceAreaProps> = ({
     <div
       className="valve-row-wrapper"
       onMouseOver={() => {
-        onHighlightAssets([valveId]);
+        onHighlightAssets([valveId, ...pipesInServiceArea]);
       }}
       onMouseLeave={() => {
-        onHighlightAssets(undefined);
+        onHighlightAssets([]);
       }}
     >
       <div className="valve-row  valve-row-hover">
@@ -41,7 +43,7 @@ const ServiceArea: FunctionComponent<ServiceAreaProps> = ({
             <button
               className="valve-row-button fly-valve-icon"
               onClick={() => {
-                onMoveToAssets([valveId]);
+                onMoveToAssets([valveId, ...pipesInServiceArea]);
               }}
             >
               <MapPin />

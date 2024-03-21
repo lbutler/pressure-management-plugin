@@ -30,11 +30,25 @@ class Plugin implements PluginI<Message> {
   }
 
   onMessage(sdk: SDK, message: Message) {
-    if (message.event !== "close-valve") {
-      return;
-    }
+    switch (message.event) {
+      case "highlight-assets":
+        return sdk.map.setHighlights(message.assets);
 
-    return sdk.network.setStatus(message.valveId, "CLOSED");
+      case "move-to-assets":
+        return sdk.map.fitTo(message.assets, {
+          flightDuration: 5000,
+          maxZoom: 20,
+          padding: {
+            top: 100,
+            right: 100,
+            bottom: 100,
+            left: 100,
+          },
+        });
+
+      default:
+        return;
+    }
   }
 }
 

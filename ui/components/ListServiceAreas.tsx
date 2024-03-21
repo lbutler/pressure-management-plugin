@@ -9,7 +9,7 @@ import type { ServiceAreaInfo } from "../../plugin/types";
 interface ListServiceAreasProps {
   serviceAreas: ServiceAreaInfo[];
   onSelectArea: (index: number) => void;
-  onHighlightAssets: (id: string[] | undefined) => void;
+  onHighlightAssets: (id: string[]) => void;
   onMoveToAssets: (id: string[]) => void;
 }
 
@@ -28,6 +28,7 @@ const ListServiceAreas: FunctionComponent<ListServiceAreasProps> = ({
             currentTime={area.currentTime}
             setting={area.currentSetting}
             minCustPressure={area.minCustomerPressure}
+            pipesInServiceArea={area.pipesInServiceArea}
             onSelectArea={() => onSelectArea(index)}
             onHighlightAssets={onHighlightAssets}
             onMoveToAssets={onMoveToAssets}

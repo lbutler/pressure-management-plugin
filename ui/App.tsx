@@ -14,6 +14,20 @@ function App() {
     undefined
   );
 
+  const highlightAsset = (assets: string[]) => {
+    sendMessage<Message>({
+      event: "highlight-assets",
+      assets,
+    });
+  };
+
+  const moveToAsset = (assets: string[]) => {
+    sendMessage<Message>({
+      event: "move-to-assets",
+      assets,
+    });
+  };
+
   console.log("pressure update:", pressureManagedAreas);
 
   // Helper function to handle conditional rendering
@@ -24,8 +38,8 @@ function App() {
         <ServiceAreaDetails
           serviceArea={pressureManagedAreas[selectedArea]}
           onGoBack={() => setSelectedArea(undefined)}
-          onHighlightAssets={(id) => console.log(`Highlight asset ${id}`)}
-          onMoveToAssets={(id) => console.log(`Move to asset ${id}`)}
+          onHighlightAssets={(id) => highlightAsset(id)}
+          onMoveToAssets={(id) => moveToAsset(id)}
           onSetValveSetting={(id, value) =>
             console.log(`Setting Valve ${id} to setting ${value}`)
           }
@@ -38,8 +52,8 @@ function App() {
       <ListServiceAreas
         serviceAreas={pressureManagedAreas}
         onSelectArea={setSelectedArea}
-        onHighlightAssets={(id) => console.log(`Highlight asset ${id}`)}
-        onMoveToAssets={(id) => console.log(`Move to asset ${id}`)}
+        onHighlightAssets={(id) => highlightAsset(id)}
+        onMoveToAssets={(id) => moveToAsset(id)}
       />
     ) : (
       <p>Loading data...</p>
