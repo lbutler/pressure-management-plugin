@@ -31,6 +31,11 @@ export type Message =
   | {
       event: "move-to-assets";
       assets: string[];
+    }
+  | {
+      event: "valve-setting";
+      valveId: Valve["id"];
+      setting: number;
     };
 
 //export type Message =

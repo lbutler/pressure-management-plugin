@@ -11,7 +11,7 @@ interface ServiceAreaDetailsProps {
   onGoBack: () => void;
   onHighlightAssets: (id: string[]) => void;
   onMoveToAssets: (id: string[]) => void;
-  onSetValveSetting: (id: string, value: string) => void;
+  onSetValveSetting: (id: string, value: number) => void;
 }
 
 interface KeyPressureDetailsProps {

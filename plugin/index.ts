@@ -46,6 +46,9 @@ class Plugin implements PluginI<Message> {
           },
         });
 
+      case "valve-setting":
+        return sdk.network.setSetting(message.valveId, message.setting);
+
       default:
         return;
     }

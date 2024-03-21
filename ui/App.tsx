@@ -28,6 +28,14 @@ function App() {
     });
   };
 
+  const setValveSetting = (valveId: string, setting: number) => {
+    sendMessage<Message>({
+      event: "valve-setting",
+      valveId,
+      setting,
+    });
+  };
+
   console.log("pressure update:", pressureManagedAreas);
 
   // Helper function to handle conditional rendering
@@ -40,9 +48,7 @@ function App() {
           onGoBack={() => setSelectedArea(undefined)}
           onHighlightAssets={(id) => highlightAsset(id)}
           onMoveToAssets={(id) => moveToAsset(id)}
-          onSetValveSetting={(id, value) =>
-            console.log(`Setting Valve ${id} to setting ${value}`)
-          }
+          onSetValveSetting={(id, value) => setValveSetting(id, value)}
         />
       );
     }
