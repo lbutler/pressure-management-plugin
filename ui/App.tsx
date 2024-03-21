@@ -36,9 +36,6 @@ function App() {
     });
   };
 
-  console.log("pressure update:", pressureManagedAreas);
-
-  // Helper function to handle conditional rendering
   const renderContent = () => {
     // If an area is selected, render ServiceAreaDetails with the selected area details
     if (selectedArea !== undefined && pressureManagedAreas !== undefined) {
@@ -65,45 +62,6 @@ function App() {
       <p>Loading data...</p>
     );
   };
-
-  // const content = pressureManagedAreas ? (
-  //   <ListServiceAreas
-  //     serviceAreas={pressureManagedAreas}
-  //     onSelectArea={setSelectedArea}
-  //     onHighlightAssets={(id) => {
-  //       console.log(`Highlight asset ${id}`);
-  //     }}
-  //     onMoveToAssets={(id) => {
-  //       console.log(`Move to asset ${id}`);
-  //     }}
-  //   />
-  // ) : (
-  //   <p>Loading data...</p>
-  // );
-
-  // const serviceAreas: ServiceAreaProps[] = [
-  //   {
-  //     valveId: "PRV 1",
-  //     isWarning: true,
-  //     currentTime: "12:00",
-  //     setting: 12,
-  //     minCustPressure: 22,
-  //   },
-  //   {
-  //     valveId: "PRV 2",
-  //     isWarning: false,
-  //     currentTime: "12:00",
-  //     setting: undefined,
-  //     minCustPressure: 20,
-  //   },
-  //   {
-  //     valveId: "PRV 3",
-  //     isWarning: false,
-  //     currentTime: "12:00",
-  //     setting: 15.3,
-  //     minCustPressure: 26.5,
-  //   },
-  // ];
 
   return (
     <>

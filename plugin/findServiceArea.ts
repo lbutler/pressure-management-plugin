@@ -53,12 +53,7 @@ function findServiceArea(prv: Valve, sdk: SDK): ServiceAreaInfo {
     .filter((a) => a.type === "Pipe")
     .map((a) => a.id);
 
-  console.log(`Found downstream node ${downstreamNode}`);
-  console.log(connectedAssets);
-
   const servicePressures = findServicePressures(connectedAssets);
-
-  console.log(servicePressures);
 
   return {
     id: prv.id,
