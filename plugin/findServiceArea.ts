@@ -9,14 +9,19 @@ import {
 import type { ServiceAreaInfo } from "./types";
 
 function findServiceArea(prv: Valve, sdk: SDK): ServiceAreaInfo {
-  console.log(`Searching valve ${prv.id} service area...`);
-
-  if (prv.status !== "ACTIVE") {
+  const timeObject = sdk.network.getTime();
+  const timeString = timeObject.time.toLocaleTimeString("en-US", {
+    timeZone: timeObject.timezone,
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23",
+  });
+  if (prv.simulation?.status !== "ACTIVE") {
     return {
       id: prv.id,
-      currentTime: "99:99",
-      currentSetting: prv.setting,
-      currentStatus: prv.status,
+      currentTime: timeString,
+      currentSetting: prv.simulation?.setting,
+      currentStatus: prv.simulation?.status,
       pipesInServiceArea: [prv.id],
       minCustomerId: undefined,
       minCustomerPressure: undefined,
@@ -57,9 +62,9 @@ function findServiceArea(prv: Valve, sdk: SDK): ServiceAreaInfo {
 
   return {
     id: prv.id,
-    currentSetting: prv.setting,
-    currentStatus: prv.status,
-    currentTime: "99:99",
+    currentSetting: prv.simulation?.setting,
+    currentStatus: prv.simulation?.status,
+    currentTime: timeString,
     pipesInServiceArea: pipesInServiceArea,
     //assestsInServiceArea: connectedAssets,
     ...servicePressures,
