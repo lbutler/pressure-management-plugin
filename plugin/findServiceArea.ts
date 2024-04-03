@@ -66,7 +66,6 @@ function findDownstreamNode(assets: Asset[], sdk: SDK): string {
     .map((a) =>
       sdk.network.getNeighborAssets(a.id).filter((n) => n.type === "Junction")
     )
-    //@ts-ignore
     .flat();
 
   const lowestJunction = junctions.reduce(

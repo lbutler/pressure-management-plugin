@@ -61,14 +61,7 @@ function App() {
     );
   };
 
-  return (
-    <>
-      <header className="header">
-        <h3 className="title">Pressure Management</h3>
-      </header>
-      {renderContent()}
-    </>
-  );
+  return <>{renderContent()}</>;
 }
 
 export default App;

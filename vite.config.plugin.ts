@@ -1,4 +1,4 @@
-import { defineConfig, LibraryFormats } from "vite"
+import { defineConfig, LibraryFormats } from "vite";
 
 export default defineConfig(() => {
   return {
@@ -8,9 +8,9 @@ export default defineConfig(() => {
       lib: {
         entry: "./plugin/index.ts",
         name: "test",
-        fileName: "plugin",
-        formats: ["es"] as LibraryFormats[]
-      }
-    }
+        fileName: "engine",
+        formats: ["es"] as LibraryFormats[],
+      },
+    },
   };
 });
