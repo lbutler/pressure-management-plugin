@@ -15,14 +15,14 @@ function App() {
   const highlightAsset = (assets: string[]) => {
     sendMessage<Message>({
       event: "highlight-assets",
-      assets,
+      assets
     });
   };
 
   const moveToAsset = (assets: string[]) => {
     sendMessage<Message>({
       event: "move-to-assets",
-      assets,
+      assets
     });
   };
 
@@ -30,7 +30,7 @@ function App() {
     sendMessage<Message>({
       event: "valve-setting",
       valveId,
-      setting,
+      setting
     });
   };
 
@@ -57,7 +57,16 @@ function App() {
         onMoveToAssets={(id) => moveToAsset(id)}
       />
     ) : (
-      <p>Loading data...</p>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "4rem 0"
+        }}
+      >
+        <p>Loading data...</p>
+      </div>
     );
   };
 

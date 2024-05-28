@@ -17,7 +17,7 @@ const ListServiceAreas: FunctionComponent<ListServiceAreasProps> = ({
   serviceAreas,
   onSelectArea,
   onHighlightAssets,
-  onMoveToAssets,
+  onMoveToAssets
 }) => {
   return (
     <>
@@ -38,8 +38,7 @@ const ListServiceAreas: FunctionComponent<ListServiceAreasProps> = ({
             <div
               role="separator"
               style={{
-                borderTop: "1px solid rgb(53, 53, 75)",
-                margin: "0px -8px",
+                borderTop: "1px solid rgb(53, 53, 75)"
               }}
             ></div>
           )}

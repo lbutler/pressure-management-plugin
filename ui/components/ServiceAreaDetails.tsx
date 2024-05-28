@@ -2,7 +2,7 @@ import "./ServiceArea.css";
 
 import { useState } from "react";
 import { FunctionComponent } from "react";
-import { MapPin, WarningIcon } from "./icons";
+import { ChevronLeft, MapPin, WarningIcon } from "./icons";
 
 import type { ServiceAreaInfo } from "../../plugin/types";
 
@@ -27,7 +27,7 @@ const KeyPressureDetails: FunctionComponent<KeyPressureDetailsProps> = ({
   value,
   locationId,
   onHighlightAssets,
-  onMoveToAssets,
+  onMoveToAssets
 }) => {
   return (
     <div
@@ -69,7 +69,7 @@ const ServiceAreaDetails: FunctionComponent<ServiceAreaDetailsProps> = ({
   onGoBack,
   onHighlightAssets,
   onMoveToAssets,
-  onSetValveSetting,
+  onSetValveSetting
 }) => {
   const [inputValue, setInputValue] = useState(serviceArea.currentSetting);
   const isWarning =
@@ -111,9 +111,15 @@ const ServiceAreaDetails: FunctionComponent<ServiceAreaDetailsProps> = ({
             </button>
             <button
               className={`valve-row-button fly-valve-icon`}
-              style={{ opacity: 1 }}
+              style={{
+                opacity: 1,
+                display: "flex",
+                gap: ".25rem",
+                alignItems: "center"
+              }}
               onClick={onGoBack}
             >
+              <ChevronLeft />
               Back
             </button>
           </div>
@@ -127,6 +133,13 @@ const ServiceAreaDetails: FunctionComponent<ServiceAreaDetailsProps> = ({
 
           {hasData ? (
             <>
+              <div
+                role="separator"
+                style={{
+                  borderTop: "1px solid rgb(53, 53, 75)",
+                  margin: ".5rem 0"
+                }}
+              ></div>
               <div className="section-header"> Key Pressures </div>
               <KeyPressureDetails
                 title="Min. Cust. Pressure"
@@ -168,7 +181,7 @@ const ServiceAreaDetails: FunctionComponent<ServiceAreaDetailsProps> = ({
               role="separator"
               style={{
                 borderTop: "1px solid rgb(53, 53, 75)",
-                margin: "12px 0px",
+                margin: ".5rem 0"
               }}
             ></div>
 
@@ -176,7 +189,7 @@ const ServiceAreaDetails: FunctionComponent<ServiceAreaDetailsProps> = ({
               {" "}
               Valve setting{" "}
             </div>
-            <p className="details-text" style={{ paddingBottom: "8px" }}>
+            <p className="details-text" style={{ paddingBottom: ".25rem" }}>
               Apply a new setting from {serviceArea.currentTime}
             </p>
 

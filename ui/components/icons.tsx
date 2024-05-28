@@ -44,4 +44,21 @@ const WarningIcon = () => (
   </svg>
 );
 
-export { MapPin, CogIcon, WarningIcon };
+const ChevronLeft = () => (
+  <svg
+    fill="none"
+    height="14"
+    viewBox="0 0 14 14"
+    width="14"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      clip-rule="evenodd"
+      d="m6.82876 7 2.9238 3.3415-1.50515 1.317-4.07619-4.6585 4.07619-4.6585 1.50515 1.31701z"
+      fill="currentColor"
+      fill-rule="evenodd"
+    />
+  </svg>
+);
+
+export { MapPin, CogIcon, WarningIcon, ChevronLeft };
