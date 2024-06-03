@@ -48,26 +48,48 @@ function App() {
       );
     }
 
-    // If pressureManagedAreas is loaded, render ListServiceAreas, else show loading state
-    return pressureManagedAreas ? (
-      <ListServiceAreas
-        serviceAreas={pressureManagedAreas}
-        onSelectArea={setSelectedArea}
-        onHighlightAssets={(id) => highlightAsset(id)}
-        onMoveToAssets={(id) => moveToAsset(id)}
-      />
-    ) : (
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "4rem 0"
-        }}
-      >
-        <p>Loading data...</p>
-      </div>
-    );
+    if (pressureManagedAreas === undefined) {
+      return (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "4rem 0"
+          }}
+        >
+          <p>Loading data...</p>
+        </div >
+      );
+    }
+
+    if (pressureManagedAreas.length) {
+      return (
+        <ListServiceAreas
+          serviceAreas={pressureManagedAreas}
+          onSelectArea={setSelectedArea}
+          onHighlightAssets={(id) => highlightAsset(id)}
+          onMoveToAssets={(id) => moveToAsset(id)}
+        />
+      );
+    }
+
+    if (pressureManagedAreas.length === 0) {
+      return (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "4rem 0"
+          }}
+        >
+          <p>No Service Areas found</p>
+        </div >
+      );
+    }
+
+
   };
 
   return <>{renderContent()}</>;

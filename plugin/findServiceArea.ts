@@ -64,7 +64,7 @@ function findServiceArea(prv: Valve, sdk: SDK): ServiceAreaInfo {
 function findDownstreamNode(assets: Asset[], sdk: SDK): string {
   const junctions = assets
     .map((a) =>
-      sdk.network.getNeighborAssets(a.id).filter((n) => n.type === "Junction")
+      sdk.network.getNeighborAssets(a.id).filter((n): n is Junction => n.type === "Junction")
     )
     .flat();
 
@@ -84,7 +84,7 @@ function findDownstreamNode(assets: Asset[], sdk: SDK): string {
 
       return acc;
     },
-    junctions[0] as Asset
+    junctions[0]
   );
 
   return lowestJunction.id;
@@ -92,9 +92,9 @@ function findDownstreamNode(assets: Asset[], sdk: SDK): string {
 
 function findServicePressures(connectedAssets: Asset[]) {
   const customerNodes = connectedAssets.filter(
-    (a) => a.group === "customerPoint"
+    (a): a is Junction => "group" in a && a.group === "customerPoint"
   );
-  const nodes = connectedAssets.filter((a) => a.type === "Junction");
+  const nodes = connectedAssets.filter((a): a is Junction => a.type === "Junction");
 
   const minCustomer = getByPressure(customerNodes);
   const minNode = getByPressure(nodes);
@@ -113,7 +113,7 @@ function findServicePressures(connectedAssets: Asset[]) {
   };
 }
 
-function getByPressure(nodes: Asset[], findMin: boolean = true): Asset {
+function getByPressure(nodes: Junction[], findMin: boolean = true): Junction {
   return nodes.reduce((prev, current) => {
     // If one of the nodes doesn't have a simulation object, return the other node
     if (!prev.simulation) return current;

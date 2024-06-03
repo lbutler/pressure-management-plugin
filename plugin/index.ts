@@ -1,14 +1,14 @@
 import {
-  PluginI,
+  PluginEngine,
   SDK,
   ValveFamilies,
-  AssetStatus,
+  init
 } from "@qatium/plugin/engine";
 import { Message } from "./types";
 
 import { findServiceArea } from "./findServiceArea";
 
-class Plugin implements PluginI<Message> {
+class Plugin implements PluginEngine {
   run(sdk: SDK) {
     // Get all PRVs
     const prvElements = sdk.network.getValves(
@@ -51,4 +51,4 @@ class Plugin implements PluginI<Message> {
   }
 }
 
-register(new Plugin());
+init(new Plugin());

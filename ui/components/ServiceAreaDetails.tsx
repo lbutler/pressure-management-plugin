@@ -1,6 +1,6 @@
 import "./ServiceArea.css";
 
-import { useState } from "react";
+import { ChangeEvent, KeyboardEvent, useState } from "react";
 import { FunctionComponent } from "react";
 import { ChevronLeft, MapPin, WarningIcon } from "./icons";
 
@@ -76,22 +76,22 @@ const ServiceAreaDetails: FunctionComponent<ServiceAreaDetailsProps> = ({
     serviceArea.minCustomerPressure !== undefined &&
     serviceArea.minCustomerPressure < 20;
 
-  const handleChange = (e) => {
-    if (isNaN(e.target.value)) {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (isNaN(Number(e.target.value))) {
       setInputValue(serviceArea.currentSetting);
       return;
     }
-    setInputValue(e.target.value);
+    setInputValue(Number(e.target.value));
   };
 
-  const handleKeyPress = (e) => {
+  const handleKeyPress = (e: KeyboardEvent) => {
     if (e.key === "Enter") {
-      onSetValveSetting(serviceArea.id, inputValue);
+      onSetValveSetting(serviceArea.id, Number(inputValue));
     }
   };
 
   const handleBlur = () => {
-    onSetValveSetting(serviceArea.id, inputValue);
+    onSetValveSetting(serviceArea.id, Number(inputValue));
   };
 
   const hasData =
@@ -106,6 +106,9 @@ const ServiceAreaDetails: FunctionComponent<ServiceAreaDetailsProps> = ({
             <button
               className="valve-row-button fly-valve-icon"
               style={{ opacity: 1 }}
+              onClick={() => {
+                onMoveToAssets([serviceArea.id]);
+              }}
             >
               <MapPin />
             </button>
@@ -143,30 +146,30 @@ const ServiceAreaDetails: FunctionComponent<ServiceAreaDetailsProps> = ({
               <div className="section-header"> Key Pressures </div>
               <KeyPressureDetails
                 title="Min. Cust. Pressure"
-                value={serviceArea.minCustomerPressure}
-                locationId={serviceArea.minCustomerId}
+                value={Number(serviceArea.minCustomerPressure)}
+                locationId={String(serviceArea.minCustomerId)}
                 onHighlightAssets={onHighlightAssets}
                 onMoveToAssets={onMoveToAssets}
               />
               <KeyPressureDetails
                 title="Max. Cust. Pressure"
-                value={serviceArea.maxCustomerPressure}
-                locationId={serviceArea.maxCustomerId}
+                value={Number(serviceArea.maxCustomerPressure)}
+                locationId={String(serviceArea.maxCustomerId)}
                 onHighlightAssets={onHighlightAssets}
                 onMoveToAssets={onMoveToAssets}
               />
               <KeyPressureDetails
                 title="Min. Area Pressure"
-                value={serviceArea.minNodePressure}
-                locationId={serviceArea.minNodeId}
+                value={Number(serviceArea.minNodePressure)}
+                locationId={String(serviceArea.minNodeId)}
                 onHighlightAssets={onHighlightAssets}
                 onMoveToAssets={onMoveToAssets}
               />
 
               <KeyPressureDetails
                 title="Max. Area Pressure"
-                value={serviceArea.maxNodePressure}
-                locationId={serviceArea.maxNodeId}
+                value={Number(serviceArea.maxNodePressure)}
+                locationId={String(serviceArea.maxNodeId)}
                 onHighlightAssets={onHighlightAssets}
                 onMoveToAssets={onMoveToAssets}
               />
@@ -204,7 +207,7 @@ const ServiceAreaDetails: FunctionComponent<ServiceAreaDetailsProps> = ({
                 aria-describedby="addon-demandSpikeInput"
                 value={inputValue}
                 onChange={handleChange}
-                onKeyPress={handleKeyPress}
+                onKeyUp={handleKeyPress}
                 onBlur={handleBlur}
               />
               <span className="input-addon">m</span>

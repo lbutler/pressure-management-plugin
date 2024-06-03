@@ -1,4 +1,6 @@
-/* .valve-row-wrapper {} */
+.valve-row-wrapper {
+  padding-bottom: 10px;
+}
 
 .valve-row {
   padding: 0.5rem 1rem;

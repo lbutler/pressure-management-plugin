@@ -29,7 +29,8 @@
     "vite-plugin-singlefile": "^1.0.0"
   },
   "dependencies": {
-    "@qatium/plugin": "0.0.14",
+    "@qatium/plugin": "^0.0.33",
+    "@qatium/sdk": "^0.0.19",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   }
