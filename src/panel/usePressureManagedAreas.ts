@@ -1,4 +1,4 @@
-import { onMessage } from "@qatium/plugin/ui";
+import { onMessage } from "@qatium/sdk/ui";
 import { useEffect, useState } from "react";
 import { Message, ServiceAreaInfo } from "../plugin/types";
 

@@ -1,22 +1,21 @@
+import { ValveFamilies } from "@qatium/sdk";
 import {
-  PluginEngine,
-  SDK,
-  ValveFamilies,
+  Plugin,
   init
-} from "@qatium/plugin/engine";
+} from "@qatium/sdk/plugin";
 import { Message } from "./types";
 
 import { findServiceArea } from "./findServiceArea";
 
-class Plugin implements PluginEngine {
-  run(sdk: SDK) {
+class MyPlugin implements Plugin {
+  run() {
     // Get all PRVs
     const prvElements = sdk.network.getValves(
       (a) => a.family === ValveFamilies.PRV && !!a.simulation
     );
 
     const serviceAreas = prvElements.map((prv) => {
-      return findServiceArea(prv, sdk);
+      return findServiceArea(prv);
     });
 
     sdk.ui.sendMessage({
@@ -25,7 +24,7 @@ class Plugin implements PluginEngine {
     });
   }
 
-  onMessage(sdk: SDK, message: Message) {
+  onMessage(message: Message) {
     switch (message.event) {
       case "highlight-assets":
         return sdk.map.setHighlights(message.assets);
@@ -51,4 +50,4 @@ class Plugin implements PluginEngine {
   }
 }
 
-init(new Plugin());
+init(new MyPlugin());

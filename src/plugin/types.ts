@@ -1,4 +1,4 @@
-import { Valve, ValveStatus } from "@qatium/plugin/engine";
+import { Valve, ValveStatus } from "@qatium/sdk";
 
 export interface ServiceAreaInfo {
   id: string;

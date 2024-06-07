@@ -1,8 +1,8 @@
-import { Valve, SDK, Asset, Junction } from "@qatium/plugin/engine";
+import { Valve, Asset, Junction } from "@qatium/sdk";
 
 import type { ServiceAreaInfo } from "./types";
 
-function findServiceArea(prv: Valve, sdk: SDK): ServiceAreaInfo {
+function findServiceArea(prv: Valve): ServiceAreaInfo {
   const timeObject = sdk.network.getTime();
   const timeString = timeObject.time.toLocaleTimeString("en-US", {
     timeZone: timeObject.timezone,
@@ -30,7 +30,7 @@ function findServiceArea(prv: Valve, sdk: SDK): ServiceAreaInfo {
   }
 
   const neighborAssets = sdk.network.getNeighborAssets(prv.id);
-  const downstreamNode = findDownstreamNode(neighborAssets, sdk);
+  const downstreamNode = findDownstreamNode(neighborAssets);
   const connectedAssets = sdk.network.getConnectedAssets(
     [downstreamNode],
     (asset) => {
@@ -61,7 +61,7 @@ function findServiceArea(prv: Valve, sdk: SDK): ServiceAreaInfo {
   };
 }
 
-function findDownstreamNode(assets: Asset[], sdk: SDK): string {
+function findDownstreamNode(assets: Asset[]): string {
   const junctions = assets
     .map((a) =>
       sdk.network.getNeighborAssets(a.id).filter((n): n is Junction => n.type === "Junction")
